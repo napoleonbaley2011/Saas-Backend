@@ -77,7 +77,7 @@ class AuthController extends Controller
             'message' => 'Inicio sesión exitoso',
             'token' => $token,
             'role' => $user->role,
-            'id_user'=>$user->id,
+            'id_user' => $user->id,
             'user' => [
                 'nombre_completo' => $user->name,
                 'permissions' => $permissions,
@@ -113,11 +113,12 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-            // Invalidar el token actual
+            logger("1");
             JWTAuth::invalidate(JWTAuth::getToken());
-
             return response()->json(['message' => 'Sesión cerrada exitosamente']);
         } catch (JWTException $e) {
+            logger("2");
+            logger($e);
             return response()->json(['error' => 'No se pudo cerrar la sesión'], 500);
         }
     }

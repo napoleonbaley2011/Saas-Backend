@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MicroempresaController;
 use App\Http\Controllers\PlanController;
+use Illuminate\Foundation\Mix;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -12,6 +13,14 @@ Route::group([
     Route::post('/registerUsers', [AuthController::class, 'registerUsers']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/getAllPlans', [PlanController::class, 'getAllPlans']);  
+});
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'micro'
+], function () {
+   Route::get('/allMicroempresas', [MicroempresaController::class, 'getAllMicroempresas']);
 });
 
 Route::group([
