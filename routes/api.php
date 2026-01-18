@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MicroempresaController;
 use App\Http\Controllers\PlanController;
@@ -15,12 +16,13 @@ Route::group([
     Route::get('/getAllPlans', [PlanController::class, 'getAllPlans']);  
 });
 
-
 Route::group([
-    'middleware' => 'api',
-    'prefix' => 'micro'
+    'middleware' => 'auth:api',
+    'prefix' => 'auth'
 ], function () {
-   Route::get('/allMicroempresas', [MicroempresaController::class, 'getAllMicroempresas']);
+    Route::get('/adminMicroempresas', [AdminController::class, 'adminMicroempresas']);
+    Route::put('/updateMicroempresaStatus/{id}', [AdminController::class, 'updateMicroempresaStatus']);
+    Route::get('/getAllPlans', [AdminController::class, 'getAllPlans']);  
 });
 
 Route::group([

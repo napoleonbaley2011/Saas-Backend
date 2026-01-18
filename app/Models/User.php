@@ -63,4 +63,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Producto::class);  // Relación uno a muchos con el modelo Producto
     }
+
+    public function microempresas()
+    {
+        return $this->hasMany(Microempresa::class);  // Relación uno a muchos con el modelo Microempresa
+    }
 }

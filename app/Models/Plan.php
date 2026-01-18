@@ -10,9 +10,14 @@ class Plan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'description', 
-        'price', 
+        'name',
+        'description',
+        'price',
         'status'
     ];
+
+    public function microempresas()
+    {
+        return $this->hasMany(Microempresa::class);  // Relación uno a muchos con el modelo Microempresa
+    }
 }
